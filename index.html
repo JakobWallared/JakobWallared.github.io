@@ -1,53 +1,214 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wedding Website</title>
+
+    <title>Powell & Moa</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
       body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #f7f2ef;
-        color: #333;
+        font-family: Inter, sans-serif;
+        background: #f7f5f0;
       }
-      header {
-        background: #7c5b4f;
-        color: #fff;
-        padding: 15px 20px;
-        text-align: center;
+      .serif {
+        font-family: "Playfair Display", serif;
       }
-      section {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 0 20px;
+
+      /* mjuk fade-in animation */
+      .fade-in {
+        animation: fadeIn 1.2s ease-out both;
       }
-      .hero {
-        background: #fff;
-        border-radius: 12px;
-        padding: 30px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
-      .hero h1 {
-        margin-top: 0;
+
+      /* smooth hover */
+      .hover-lift {
+        transition: all 0.3s ease;
+      }
+      .hover-lift:hover {
+        transform: translateY(-4px);
       }
     </style>
   </head>
-  <body>
-    <header>
-      <h1>Bröllop</h1>
-      <h2>Välkommen till vår bröllopswebbplats</h2>
-      <p>HejHej</p>
+
+  <body class="text-gray-900">
+    <!-- NAV -->
+    <header
+      class="fixed w-full top-0 z-50 bg-[#f7f5f0]/80 backdrop-blur border-b border-black/5"
+    >
+      <div
+        class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4"
+      >
+        <div class="serif text-xl">P & M</div>
+
+        <nav class="hidden md:flex gap-8 text-sm tracking-wide">
+          <a href="#home">Hem</a>
+          <a href="#story">Om oss</a>
+          <a href="#schema">Schema</a>
+          <a href="#rsvp">RSVP</a>
+        </nav>
+
+        <a
+          href="#rsvp"
+          class="bg-black text-white px-4 py-2 text-sm rounded-full hover:opacity-80"
+        >
+          OSA
+        </a>
+      </div>
     </header>
-    <main>
-      <section class="hero">
-        <h2>Our Story</h2>
-        <p>Join us for a beautiful day of love, laughter, and celebration. </p>
-        <h3>Event Details</h3>
-        <p>Date: Saturday, [Date]</p>
-        <p>Location: [Venue Name]</p>
-      </section>
-    </main>
+
+    <!-- HERO -->
+    <section
+      id="home"
+      class="h-screen flex items-center justify-center text-center px-6 relative"
+    >
+      <div class="fade-in">
+        <p class="uppercase tracking-[0.3em] text-sm opacity-60 mb-4">
+          Vi ska gifta oss
+        </p>
+
+        <h1 class="serif text-5xl md:text-7xl mb-6">Powell & Moa</h1>
+
+        <p class="text-lg opacity-70 mb-8">"Datum" 2027 · Borås</p>
+
+        <a
+          href="#rsvp"
+          class="inline-block bg-black text-white px-8 py-3 rounded-full hover-lift"
+        >
+          Vi ser fram emot att fira med er
+        </a>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section
+      id="story"
+      class="max-w-4xl mx-auto px-6 py-28 text-center fade-in"
+    >
+      <h2 class="serif text-3xl mb-6">Vår kärlekssaga</h2>
+      <p class="opacity-70 leading-relaxed">
+        Vi möttes en vanlig dag och resten är historia. Nu vill vi dela vår
+        största dag med er.
+      </p>
+    </section>
+
+    <!-- IMAGE SECTION -->
+    <section class="px-6 pb-24">
+      <div class="max-w-5xl mx-auto">
+        <img
+          class="rounded-2xl shadow-xl hover-lift"
+          src="https://images.unsplash.com/photo-1523438097201-512ae7d59c1c"
+        />
+      </div>
+    </section>
+
+    <!-- SCHEMA -->
+    <section id="schema" class="bg-white py-24 px-6">
+      <div class="max-w-5xl mx-auto text-center">
+        <h2 class="serif text-3xl mb-12">Dagens schema</h2>
+
+        <div class="grid md:grid-cols-4 gap-8 text-sm">
+          <div class="hover-lift">
+            <p class="font-semibold">14:00</p>
+            <p>Vigsel</p>
+          </div>
+
+          <div class="hover-lift">
+            <p class="font-semibold">16:00</p>
+            <p>Mingel</p>
+          </div>
+
+          <div class="hover-lift">
+            <p class="font-semibold">18:00</p>
+            <p>Middag</p>
+          </div>
+
+          <div class="hover-lift">
+            <p class="font-semibold">22:00</p>
+            <p>Fest</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="py-24 px-6 bg-[#faf8f5]">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="uppercase tracking-[0.3em] text-xs text-gray-500">
+            Galleri
+          </p>
+
+          <h2 class="serif text-4xl mt-3">Våra ögonblick</h2>
+
+          <p class="mt-4 text-gray-600">
+            Bilder från dagen uppdateras automatiskt.
+          </p>
+        </div>
+
+        <div
+          id="galleryGrid"
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+        >
+          <!-- Bilder kommer här -->
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp" class="py-28 px-6">
+      <div class="max-w-xl mx-auto text-center">
+        <h2 class="serif text-3xl mb-6">OSA</h2>
+
+        <form class="space-y-4">
+          <input class="w-full p-3 border rounded-lg" placeholder="Namn" />
+
+          <input
+            class="w-full p-3 border rounded-lg"
+            type="number"
+            placeholder="Antal gäster"
+          />
+
+          <select class="w-full p-3 border rounded-lg">
+            <option>Kommer</option>
+            <option>Kommer inte</option>
+          </select>
+
+          <input
+            class="w-full p-3 border rounded-lg"
+            placeholder="Matpreferenser"
+          />
+
+          <button
+            class="w-full bg-black text-white py-3 rounded-full hover:opacity-80 hover-lift"
+          >
+            Skicka svar
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-10 text-sm opacity-60">
+      Powell & Moa · 2027
+    </footer>
   </body>
 </html>
