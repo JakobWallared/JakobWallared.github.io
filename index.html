@@ -46,6 +46,21 @@
       .hover-lift:hover {
         transform: translateY(-4px);
       }
+
+      /* Mobile meny */
+      .mobile-nav {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      .mobile-nav.open {
+        max-height: 300px;
+      }
+      .mobile-nav a {
+        display: block;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
     </style>
   </head>
 
@@ -66,13 +81,36 @@
           <a href="#rsvp">RSVP</a>
         </nav>
 
+        <!-- Hamburgermeny för mobil -->
+        <button
+          id="menuBtn"
+          class="md:hidden text-xl"
+          aria-label="Slå på/av meny"
+        >
+          ☰
+        </button>
+
         <a
           href="#rsvp"
-          class="bg-black text-white px-4 py-2 text-sm rounded-full hover:opacity-80"
+          class="hidden md:block bg-black text-white px-4 py-2 text-sm rounded-full hover:opacity-80"
         >
           OSA
         </a>
       </div>
+
+      <!-- Mobil navigation -->
+      <nav id="mobileNav" class="mobile-nav md:hidden bg-[#f7f5f0] px-6 text-sm">
+        <a href="#home" class="block">Hem</a>
+        <a href="#story" class="block">Om oss</a>
+        <a href="#schema" class="block">Schema</a>
+        <a href="#rsvp" class="block">RSVP</a>
+        <a
+          href="#rsvp"
+          class="block bg-black text-white px-4 py-2 rounded-full hover:opacity-80 text-center mt-4"
+        >
+          OSA
+        </a>
+      </nav>
     </header>
 
     <!-- HERO -->
@@ -87,7 +125,7 @@
 
         <h1 class="serif text-5xl md:text-7xl mb-6">Powell & Moa</h1>
 
-        <p class="text-lg opacity-70 mb-8">"Datum" 2027 · Borås</p>
+        <p class="text-lg opacity-70 mb-8">4 September 2027 · Borås</p>
 
         <a
           href="#rsvp"
@@ -210,5 +248,21 @@
     <footer class="text-center py-10 text-sm opacity-60">
       Powell & Moa · 2027
     </footer>
+
+    <script>
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileNav = document.getElementById("mobileNav");
+
+      menuBtn.addEventListener("click", () => {
+        mobileNav.classList.toggle("open");
+      });
+
+      // Stäng menyn när man klickar på en länk
+      mobileNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileNav.classList.remove("open");
+        });
+      });
+    </script>
   </body>
 </html>
