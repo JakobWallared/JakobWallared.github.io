@@ -64,40 +64,55 @@ function updateCountdown() {
 const countdownStyle = `
 .countdown-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin: 2rem auto;
+  max-width: 100%;
+  padding: 0 0.5rem;
 }
 
 .countdown-item {
   text-align: center;
-  padding: 1.5rem;
+  padding: 0.75rem 0.5rem;
   background: rgba(0, 0, 0, 0.03);
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
 }
 
 .countdown-number {
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-weight: bold;
   font-family: "Inter", sans-serif;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+  line-height: 1;
 }
 
 .countdown-label {
-  font-size: 0.875rem;
+  font-size: 0.65rem;
   opacity: 0.6;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
 }
 
 @media (min-width: 640px) {
   .countdown-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
+    padding: 0;
+  }
+  
+  .countdown-item {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
   }
   
   .countdown-number {
     font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .countdown-label {
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
   }
 }
 `;
