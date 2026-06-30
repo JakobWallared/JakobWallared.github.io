@@ -11,6 +11,14 @@
   position: relative;
 }
 
+@media (max-width: 640px) {
+  .hero {
+    height: auto;
+    min-height: 80vh;
+    padding: 6rem 1.5rem 3rem;
+  }
+}
+
 .hero-content h1 {
   font-family: "Playfair Display", serif;
   font-size: 3rem;

@@ -31,11 +31,18 @@ function initializeRSVPForm() {
 // Submit RSVP
 function submitRSVP() {
   const form = document.getElementById("rsvpForm");
-  const nameInput = form.querySelector('input[placeholder="Namn"]');
-  const guestInput = form.querySelector('input[placeholder="Antal gäster"]');
+  const nameInput = form.querySelector('input[type="text"][autocomplete="name"]');
+  const guestInput = form.querySelector('input[type="number"]');
   const statusSelect = form.querySelector("select");
-  const dietInput = form.querySelector('input[placeholder="Matpreferenser"]');
+  const dietInput = form.querySelector('input[type="text"][autocomplete="off"]');
   const submitBtn = form.querySelector("button");
+
+  // Validate all inputs exist
+  if (!nameInput || !guestInput || !statusSelect || !dietInput) {
+    console.error("Form inputs not found!");
+    showRSVPMessage("Något gick fel. Försök igen senare.", "error");
+    return;
+  }
 
   // Validate
   if (!nameInput.value.trim()) {
@@ -82,7 +89,7 @@ function submitRSVP() {
 function saveRSVPLocally(response) {
   rsvpResponses.push(response);
   localStorage.setItem(RSVP_STORAGE_KEY, JSON.stringify(rsvpResponses));
-  showRSVPMessage("Tack för ditt svar! Vi ses på bröllopet 💕", "success");
+  showRSVPMessage("Tack för ditt svar! Vi ses på bröllopet", "success");
 }
 
 // Show RSVP Message
@@ -110,17 +117,24 @@ function showRSVPConfirmation(response) {
   const form = document.getElementById("rsvpForm");
   const confirmBox = form.parentElement.querySelector(".confirmation-box");
 
+  console.log("Showing confirmation for:", response.name); // Debug
+  console.log("Confirmation box found:", !!confirmBox); // Debug
+
   if (confirmBox) {
     confirmBox.innerHTML = `
-      <h3>Tack ${response.name}!</h3>
-      <p>${response.guests} gäst${response.guests !== 1 ? "er" : ""} • Status: ${response.status === "Kommer" ? "✓ Kommer" : "✗ Kommer inte"}</p>
-      ${response.diet ? `<p>Matpreferenser: ${response.diet}</p>` : ""}
+      <h3>Tack ${response.name}! </h3>
+      <p>${response.guests} gäst${response.guests !== 1 ? "er" : ""} kommer</p>
+      <p>Status: ${response.status === "Kommer" ? "✓ Du kommer" : "✗ Du kommer inte"}</p>
+      ${response.diet ? `<p style="margin-top: 0.5rem; font-size: 0.8rem;">Mat: ${response.diet}</p>` : ""}
     `;
     confirmBox.classList.add("show");
+    console.log("Show class added"); // Debug
 
     setTimeout(() => {
       confirmBox.classList.remove("show");
     }, 5000);
+  } else {
+    console.error("Confirmation box not found!"); // Debug
   }
 }
 
@@ -150,7 +164,7 @@ async function saveRSVPToSupabase(response) {
     });
 
     if (res.ok) {
-      showRSVPMessage("Tack för ditt svar! Vi ses på bröllopet 💕", "success");
+      showRSVPMessage("Tack för ditt svar! Vi ses på bröllopet", "success");
     }
   } catch (error) {
     console.error("RSVP error:", error);
