@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSA - Powell & Moa</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/rsvp.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="header-container">
+        <div class="logo">P & M</div>
+
+        <nav class="desktop-nav">
+          <a href="index.html">Hem</a>
+          <a href="schedule.html">Schema</a>
+          <a href="gallery.html">Bildgalleri</a>
+          <a href="practical.html">Praktiskt</a>
+        </nav>
+
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <a href="rsvp.html" class="btn-rsvp hidden-mobile">OSA</a>
+      </div>
+
+      <nav id="mobileNav" class="mobile-nav">
+        <a href="index.html">Hem</a>
+        <a href="schedule.html">Schema</a>
+        <a href="gallery.html">Bildgalleri</a>
+        <a href="practical.html">Praktiskt</a>
+        <a href="rsvp.html" class="btn-rsvp" style="display: block !important; margin-top: 0.5rem">OSA</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- RSVP SECTION -->
+      <section class="rsvp-section fade-in">
+        <div class="rsvp-container">
+          <h2>Meddela svar</h2>
+          <p style="opacity: 0.7; font-size: 0.95rem; margin-bottom: 2rem">
+            Vi behöver ditt svar senast DATUM
+          </p>
+
+          <div class="confirmation-box">
+            <h3>Tack för ditt svar!</h3>
+            <p>Vi ses på bröllopet</p>
+          </div>
+
+          <form id="rsvpForm" class="form-group">
+            <input
+              class="form-input"
+              type="text"
+              placeholder="Namn"
+              required
+              autocomplete="name"
+            />
+
+            <input
+              class="form-input"
+              type="number"
+              placeholder="Antal gäster"
+              min="1"
+              max="10"
+              value="1"
+              required
+            />
+
+            <select class="form-select" required>
+              <option value="">Välj status</option>
+              <option value="Kommer">Kommer</option>
+              <option value="Kommer inte">Kommer inte</option>
+            </select>
+
+            <input
+              class="form-input"
+              type="text"
+              placeholder="Matpreferenser (t.ex. vegetarisk, allergi)"
+              autocomplete="off"
+            />
+
+            <button type="submit" class="btn-submit">Skicka svar</button>
+          </form>
+
+          <p style="font-size: 0.85rem; opacity: 0.6; margin-top: 1.5rem">
+            Vi sparar ditt svar. Om du behöver ändra ditt svar, returnera bara formuläret.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>Powell & Moa · 2027</footer>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/rsvp.js"></script>
+  </body>
+</html>
