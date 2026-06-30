@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Praktisk Information - Powell & Moa</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+
+    <style>
+      .practical-section {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      .practical-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .practical-container h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.25rem;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      @media (min-width: 768px) {
+        .info-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .info-card {
+        padding: 2rem;
+        background: #faf8f5;
+        border-radius: 1rem;
+        border-left: 4px solid #000;
+      }
+
+      .info-card h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .info-card p {
+        opacity: 0.7;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
+      }
+
+      .info-card p:last-child {
+        margin-bottom: 0;
+      }
+
+      .faq-section {
+        margin-top: 3rem;
+      }
+
+      .faq-section h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .faq-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .faq-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .faq-question {
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0.75rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+      }
+
+      .faq-question::after {
+        content: "▼";
+        font-size: 0.75rem;
+        transition: transform 0.3s ease;
+      }
+
+      .faq-question.active::after {
+        transform: rotate(-180deg);
+      }
+
+      .faq-answer {
+        display: none;
+        opacity: 0.7;
+        margin-top: 0.75rem;
+        line-height: 1.6;
+      }
+
+      .faq-answer.show {
+        display: block;
+      }
+
+      .contact-section {
+        margin-top: 3rem;
+        padding: 2rem;
+        background: #faf8f5;
+        border-radius: 1rem;
+        text-align: center;
+      }
+
+      .contact-section p {
+        opacity: 0.7;
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-section a {
+        color: #000;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="header-container">
+        <div class="logo">P & M</div>
+
+        <nav class="desktop-nav">
+          <a href="index.html">Hem</a>
+          <a href="schedule.html">Schema</a>
+          <a href="gallery.html">Bildgalleri</a>
+          <a href="practical.html">Praktiskt</a>
+        </nav>
+
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <a href="rsvp.html" class="btn-rsvp hidden-mobile">OSA</a>
+      </div>
+
+      <nav id="mobileNav" class="mobile-nav">
+        <a href="index.html">Hem</a>
+        <a href="schedule.html">Schema</a>
+        <a href="gallery.html">Bildgalleri</a>
+        <a href="practical.html">Praktiskt</a>
+        <a href="rsvp.html" class="btn-rsvp" style="display: block !important; margin-top: 0.5rem">OSA</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- PRACTICAL SECTION -->
+      <section class="practical-section fade-in">
+        <div class="practical-container">
+          <h1>Praktisk Information</h1>
+
+          <div class="info-grid">
+            <div class="info-card">
+              <h2> Ankomst</h2>
+              <p><strong>Vigsel:</strong> Börjar exakt kl. TID</p>
+              <p>Vi rekommenderar att ankomma 15 minuter tidigare.</p>
+              <p>Parkering är tillgänglig på området.</p>
+            </div>
+
+            <div class="info-card">
+              <h2> Dresscode</h2>
+              <p><strong>TYP AV KLÄDSEL</strong></p>
+              <p>Män: TEXT</p>
+              <p>Kvinnor: TEXT </p>
+            </div>
+
+            <div class="info-card">
+              <h2>Mat & Dryck</h2>
+              <p>Vi serverar VAD FÖR MAT.</p>
+              <p>Ange eventuella allergier och matpreferenser när du OSA:r.</p>
+            </div>
+
+            <div class="info-card">
+              <h2>Musik & Dans</h2>
+              <p> MUSIK. Dansyta öppen hele kvällen.</p>
+              <p> TEXT</p>
+            </div>
+
+            <div class="info-card">
+              <h2> Fotografering</h2>
+              <p> TEXT.</p>
+              <p>Dela gärna dina egna bilder i bildgalleriet!</p>
+            </div>
+
+            <div class="info-card">
+              <h2>Transport</h2>
+              <p>Parkering är TILLGÄNGLIG på området, ELLER?.</p>
+            </div>
+          </div>
+
+          <!-- FAQ SECTION -->
+          <div class="faq-section">
+            <h2>Vanliga frågor</h2>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span>Kan jag ta med en plus-one?</span>
+              </div>
+              <div class="faq-answer">
+                SVAR.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span>Vad gör jag med barn?</span>
+              </div>
+              <div class="faq-answer">
+                SVAR
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span>Kan jag ändra mitt svar senare?</span>
+              </div>
+              <div class="faq-answer">
+                SVAR
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span>Kan jag hjälpa till med något?</span>
+              </div>
+              <div class="faq-answer">
+                SVAR
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span>Var finns boende?</span>
+              </div>
+              <div class="faq-answer">
+                SVAR
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTACT SECTION -->
+          <div class="contact-section">
+            <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 1rem">
+              Har du fler frågor?
+            </h2>
+            <p>Kontakta oss gärna på:</p>
+            <p>
+              <a href="mailto:powell@example.com">MAIL</a> eller
+              <a href="tel:+46701234567">NUMMER</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>Powell & Moa · 2027</footer>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script>
+      // FAQ Toggle
+      document.querySelectorAll(".faq-question").forEach((question) => {
+        question.addEventListener("click", function () {
+          this.classList.toggle("active");
+          this.nextElementSibling.classList.toggle("show");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Powell & Moa - Vi ska gifta oss</title>
+    <title>Bildgalleri - Powell & Moa</title>
 
     <!-- Fonts -->
     <link
@@ -14,7 +14,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
   </head>
 
   <body>
@@ -39,30 +39,40 @@
         <a href="schedule.html">Schema</a>
         <a href="gallery.html">Bildgalleri</a>
         <a href="practical.html">Praktiskt</a>
-        <a
-          href="rsvp.html"
-          class="btn-rsvp"
-          style="display: block !important; margin-top: 0.5rem"
-          >OSA</a
-        >
+        <a href="rsvp.html" class="btn-rsvp" style="display: block !important; margin-top: 0.5rem">OSA</a>
       </nav>
     </header>
 
     <main>
-      <!-- HERO SECTION -->
-      <section class="hero fade-in">
-        <div class="hero-content">
-          <p class="subtitle">Vi ska gifta oss</p>
-          <h1>Powell & Moa</h1>
-          <p class="date">4 September 2027 · Borås</p>
-          <a href="rsvp.html" class="btn-primary hover-lift"
-            >Vi ser fram emot att fira med er</a
-          >
+      <!-- GALLERY SECTION -->
+      <section class="gallery-section fade-in">
+        <div class="container">
+          <div class="gallery-header">
+            <p class="gallery-label">Galleri</p>
+            <h1 class="gallery-header h2" style="font-family: 'Playfair Display', serif; font-size: 2.25rem; margin: 0.75rem 0 0">
+              Våra ögonblick
+            </h1>
+            <p class="gallery-description">Text</p>
+          </div>
+
+          <div id="galleryGrid" class="gallery-grid">
+            <!-- Bilder läggs till här av gallery.js -->
+          </div>
+
+          <!-- UPLOAD SECTION -->
+          <div class="upload-section">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem">
+              Dela dina bilder
+            </h2>
+            <div id="uploadArea" class="upload-area">
+              
+              <p><strong>Klicka eller dra och släpp bilder här</strong></p>
+              <p style="opacity: 0.6">Stöds: JPG, PNG, WebP </p>
+              <input type="file" multiple accept="image/*" />
+            </div>
+          </div>
         </div>
       </section>
-
-      <!-- COUNTDOWN -->
-      <section id="countdownTimer" style="padding: 3rem 1.5rem"></section>
     </main>
 
     <!-- FOOTER -->
@@ -70,6 +80,7 @@
 
     <!-- JavaScript -->
     <script src="js/app.js"></script>
-    <script src="js/countdown.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/upload.js"></script>
   </body>
 </html>

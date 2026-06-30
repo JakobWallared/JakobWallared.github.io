@@ -1,0 +1,118 @@
+/* ===== GALLERY PAGE STYLES ===== */
+
+.gallery-section {
+  padding: 6rem 1.5rem;
+  background: #faf8f5;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.gallery-label {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.gallery-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.25rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.gallery-description {
+  margin-top: 1rem;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+  max-width: 1536px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  aspect-ratio: 1;
+  background: #e5e7eb;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-item.loading::after {
+  content: "⏳";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+}
+
+/* Upload Section */
+.upload-section {
+  max-width: 1280px;
+  margin: 3rem auto 0;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.upload-area {
+  border: 2px dashed #d1d5db;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+  border-color: #000;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.upload-area input[type="file"] {
+  display: none;
+}
+
+.upload-area p {
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.upload-area .icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
