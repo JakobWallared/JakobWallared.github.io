@@ -66,7 +66,7 @@ function handleFiles(files) {
       // uploadToSupabase(imageUrl);
 
       addGalleryImage(imageUrl);
-      showUploadMessage("Bild uppladdad! 🎉", "success");
+      showUploadMessage("Bild uppladdad!", "success");
     };
 
     reader.readAsDataURL(file);
