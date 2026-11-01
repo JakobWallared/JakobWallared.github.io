@@ -1,5 +1,5 @@
-// ===== UPLOAD.JS - Image Upload Handler =====
-// Ready for Supabase integration
+
+/* ===== UPLOAD.JS ===== */
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeUploadArea();
@@ -9,115 +9,128 @@ function initializeUploadArea() {
   const uploadArea = document.getElementById("uploadArea");
   if (!uploadArea) return;
 
-  const fileInput = uploadArea.querySelector('input[type="file"]');
+  const fileInput =
+    uploadArea.querySelector('input[type="file"]');
 
-  // Click to upload
+  const status = document.createElement("p");
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  uploadArea.insertAdjacentElement("afterend", status);
+
+  let uploading = false;
+
   uploadArea.addEventListener("click", () => {
-    fileInput.click();
+    if (!uploading) fileInput.click();
   });
 
-  // Drag and drop
-  uploadArea.addEventListener("dragover", (e) => {
+  fileInput.addEventListener("click", e => {
+    e.stopPropagation();
+  });
+
+  fileInput.addEventListener("change", async e => {
+    await handleFiles(e.target.files);
+    fileInput.value = "";
+  });
+
+  uploadArea.addEventListener("dragover", e => {
     e.preventDefault();
-    uploadArea.style.borderColor = "#000";
-    uploadArea.style.background = "rgba(0, 0, 0, 0.05)";
+    uploadArea.style.borderColor = "#806b5a";
   });
 
   uploadArea.addEventListener("dragleave", () => {
     uploadArea.style.borderColor = "#d1d5db";
-    uploadArea.style.background = "rgba(255, 255, 255, 0.5)";
   });
 
-  uploadArea.addEventListener("drop", (e) => {
+  uploadArea.addEventListener("drop", async e => {
     e.preventDefault();
     uploadArea.style.borderColor = "#d1d5db";
-    uploadArea.style.background = "rgba(255, 255, 255, 0.5)";
-
-    const files = e.dataTransfer.files;
-    handleFiles(files);
+    await handleFiles(e.dataTransfer.files);
   });
 
-  // File input change
-  fileInput.addEventListener("change", (e) => {
-    handleFiles(e.target.files);
-  });
-}
+  async function handleFiles(files) {
+    if (uploading) return;
 
-function handleFiles(files) {
-  Array.from(files).forEach((file) => {
-    // Validate file
-    if (!file.type.startsWith("image/")) {
-      showUploadMessage("Bara bildformat är tillåtna", "error");
-      return;
-    }
+    const selectedFiles = Array.from(files);
+    if (!selectedFiles.length) return;
 
-    if (file.size > 5 * 1024 * 1024) {
-      showUploadMessage("Bilden får inte vara större än 5MB", "error");
-      return;
-    }
+    uploading = true;
+    uploadArea.style.opacity = "0.6";
+    uploadArea.style.pointerEvents = "none";
 
-    // Read and upload image
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const imageUrl = e.target.result;
+    let successful = 0;
+    let failed = 0;
 
-      // For now, store as data URL in localStorage
-      // Later, replace this with Supabase upload:
-      // uploadToSupabase(imageUrl);
-
-      addGalleryImage(imageUrl);
-      showUploadMessage("Bild uppladdad!", "success");
+    const allowedTypes = {
+      "image/jpeg": ["jpg", "jpeg"],
+      "image/png": ["png"],
+      "image/webp": ["webp"]
     };
 
-    reader.readAsDataURL(file);
-  });
-}
+    try {
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
 
-function showUploadMessage(message, type) {
-  const uploadArea = document.getElementById("uploadArea");
-  if (!uploadArea) return;
+        const extension = file.name
+          .split(".")
+          .pop()
+          .toLowerCase();
 
-  const msg = document.createElement("p");
-  msg.textContent = message;
-  msg.style.margin = "1rem 0 0 0";
-  msg.style.fontSize = "0.875rem";
-  msg.style.color = type === "error" ? "#991b1b" : "#065f46";
-  msg.style.opacity = "0.8";
+        if (
+          !allowedTypes[file.type] ||
+          !allowedTypes[file.type].includes(extension)
+        ) {
+          failed++;
+          status.textContent =
+            "Endast JPG, PNG och WebP är tillåtna.";
+          continue;
+        }
 
-  uploadArea.appendChild(msg);
+        if (file.size > 10 * 1024 * 1024) {
+          failed++;
+          status.textContent =
+            "En bild får inte vara större än 10 MB.";
+          continue;
+        }
 
-  setTimeout(() => {
-    msg.remove();
-  }, 4000);
-}
+        status.textContent =
+          `Laddar upp bild ${i + 1} av ${selectedFiles.length}...`;
 
-// ===== SUPABASE INTEGRATION (Template) =====
-/*
-async function uploadToSupabase(file) {
-  const supabaseUrl = "YOUR_SUPABASE_URL";
-  const supabaseKey = "YOUR_SUPABASE_KEY";
+        const filename =
+          `${crypto.randomUUID()}.${extension}`;
 
-  const formData = new FormData();
-  formData.append("file", file);
+        const path = `guest-uploads/${filename}`;
 
-  try {
-    const response = await fetch(`${supabaseUrl}/storage/v1/object/wedding-gallery/${file.name}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${supabaseKey}`,
-      },
-      body: formData,
-    });
+        const { error } = await supabaseClient.storage
+          .from("weddings photos")
+          .upload(path, file, {
+            contentType: file.type,
+            upsert: false
+          });
 
-    if (response.ok) {
-      const data = await response.json();
-      const imageUrl = `${supabaseUrl}/storage/v1/object/public/wedding-gallery/${data.name}`;
-      addGalleryImage(imageUrl);
-      showUploadMessage("Bild uppladdad till Supabase!", "success");
+        if (error) {
+          console.error("Upload error:", error);
+          failed++;
+        } else {
+          successful++;
+        }
+      }
+
+      status.textContent =
+        `${successful} bilder uppladdade! 🤍` +
+        (failed ? ` ${failed} misslyckades.` : "");
+
+      if (successful > 0) {
+        await loadGalleryImages();
+      }
+
+    } catch (error) {
+      console.error(error);
+      status.textContent =
+        "Något gick fel. Försök igen.";
+    } finally {
+      uploading = false;
+      uploadArea.style.opacity = "1";
+      uploadArea.style.pointerEvents = "auto";
     }
-  } catch (error) {
-    console.error("Upload error:", error);
-    showUploadMessage("Uppladdning misslyckades", "error");
   }
 }
-*/
