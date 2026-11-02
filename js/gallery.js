@@ -16,6 +16,55 @@ window.supabaseClient = window.supabase.createClient(
 );
 
 let loadingGallery = false;
+let galleryImages = [];
+let currentSlide = 0;
+let selectedImageName = null;
+
+function renderGallerySlide() {
+  const galleryGrid = document.getElementById("galleryGrid");
+  const previousButton = document.getElementById("galleryPrevious");
+  const nextButton = document.getElementById("galleryNext");
+  const counter = document.getElementById("galleryCounter");
+  if (!galleryGrid) return;
+
+  galleryGrid.replaceChildren();
+
+  if (!galleryImages.length) {
+    const p = document.createElement("p");
+    p.textContent = "Inga bilder ännu. Bli först med att dela ett minne! 🤍";
+    galleryGrid.appendChild(p);
+    if (previousButton) previousButton.hidden = true;
+    if (nextButton) nextButton.hidden = true;
+    if (counter) counter.textContent = "";
+    return;
+  }
+
+  const image = galleryImages[currentSlide];
+  const slide = document.createElement("div");
+  slide.className = "gallery-item scale-up";
+
+  const img = document.createElement("img");
+  img.src = image.url;
+  img.alt = "Bild från vårt bröllop";
+  img.addEventListener("click", () => {
+    window.open(image.url, "_blank", "noopener");
+  });
+
+  slide.appendChild(img);
+  galleryGrid.appendChild(slide);
+
+  if (previousButton) previousButton.hidden = galleryImages.length < 2;
+  if (nextButton) nextButton.hidden = galleryImages.length < 2;
+  if (counter) counter.textContent = `${currentSlide + 1} / ${galleryImages.length}`;
+}
+
+function moveGallerySlide(direction) {
+  if (galleryImages.length < 2) return;
+
+  currentSlide = (currentSlide + direction + galleryImages.length) % galleryImages.length;
+  selectedImageName = galleryImages[currentSlide].name;
+  renderGallerySlide();
+}
 
 // Hämta bilder från Supabase
 async function loadGalleryImages() {
@@ -37,43 +86,30 @@ async function loadGalleryImages() {
 
     if (error) throw error;
 
-    const images = (data || []).filter(file =>
+    const files = (data || []).filter(file =>
       /\.(jpg|jpeg|png|webp)$/i.test(file.name)
     );
 
-    const fragment = document.createDocumentFragment();
-
-    images.forEach(file => {
+    const images = files.map(file => {
       const path = `${FOLDER}/${file.name}`;
 
       const { data: urlData } = supabaseClient.storage
         .from(BUCKET)
         .getPublicUrl(path);
 
-      const div = document.createElement("div");
-      div.className = "gallery-item scale-up";
-
-      const img = document.createElement("img");
-      img.src = urlData.publicUrl;
-      img.alt = "Bild från vårt bröllop";
-      img.loading = "lazy";
-
-      img.addEventListener("click", () => {
-        window.open(urlData.publicUrl, "_blank", "noopener");
-      });
-
-      div.appendChild(img);
-      fragment.appendChild(div);
+      return { name: file.name, url: urlData.publicUrl };
     });
 
-    galleryGrid.replaceChildren(fragment);
+    const imageListChanged =
+      images.length !== galleryImages.length ||
+      images.some((image, index) => image.name !== galleryImages[index]?.name);
+    if (!imageListChanged && galleryGrid.children.length) return;
 
-    if (!images.length) {
-      const p = document.createElement("p");
-      p.textContent =
-        "Inga bilder ännu. Bli först med att dela ett minne! 🤍";
-      galleryGrid.appendChild(p);
-    }
+    galleryImages = images;
+    const selectedIndex = galleryImages.findIndex(image => image.name === selectedImageName);
+    currentSlide = selectedIndex >= 0 ? selectedIndex : Math.min(currentSlide, galleryImages.length - 1);
+    selectedImageName = galleryImages[currentSlide]?.name ?? null;
+    renderGallerySlide();
 
   } catch (error) {
     console.error("Gallery error:", error);
@@ -81,6 +117,10 @@ async function loadGalleryImages() {
       galleryGrid.textContent =
         "Kunde inte hämta bilderna just nu.";
     }
+    const previousButton = document.getElementById("galleryPrevious");
+    const nextButton = document.getElementById("galleryNext");
+    if (previousButton) previousButton.hidden = true;
+    if (nextButton) nextButton.hidden = true;
   } finally {
     loadingGallery = false;
   }
@@ -88,6 +128,13 @@ async function loadGalleryImages() {
 
 // Ladda galleriet vid sidstart
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("galleryPrevious")?.addEventListener("click", () => {
+    moveGallerySlide(-1);
+  });
+  document.getElementById("galleryNext")?.addEventListener("click", () => {
+    moveGallerySlide(1);
+  });
+
   loadGalleryImages();
 
   // Kontrollera nya bilder var femte sekund

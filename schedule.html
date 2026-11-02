@@ -7,7 +7,7 @@
 
     <!-- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -18,7 +18,7 @@
     <style>
       .schema-section {
         padding: 7rem 1.5rem 3rem;
-        background: white;
+        background: #f5f0e8;
       }
 
       .schema-container {
@@ -29,7 +29,9 @@
 
       .schema-container h1 {
         font-family: "Playfair Display", serif;
-        font-size: 2.25rem;
+        font-size: 2.65rem;
+        font-weight: 400;
+        color: #424638;
         margin-bottom: 3rem;
       }
 
@@ -48,37 +50,40 @@
 
       .schedule-item {
         padding: 2rem 1.5rem;
-        background: #faf8f5;
-        border-radius: 0.75rem;
+        background: #eee7dc;
+        border-radius: 0;
+        border-bottom: 2px solid #a9aa93;
         transition: all 0.3s ease;
       }
 
       .schedule-item:hover {
         transform: translateY(-4px);
-        background: #f3f4f6;
+        background: #e7dfd3;
       }
 
       .schedule-time {
+        font-family: "Playfair Display", serif;
         font-size: 1.5rem;
-        font-weight: 600;
+        font-weight: 400;
+        color: #858b73;
         margin-bottom: 0.5rem;
       }
 
       .schedule-activity {
         font-size: 0.95rem;
-        opacity: 0.7;
+        color: #626454;
       }
 
       .schedule-details {
         display: block !important;
         visibility: visible !important;
-        color: #111827;
+        color: #505244;
         font-size: 0.85rem;
         font-weight: 500;
         line-height: 1.6;
         opacity: 1 !important;
         margin-top: 0.75rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(82, 85, 68, 0.2);
         padding-top: 0.75rem;
       }
 
@@ -86,8 +91,9 @@
         max-width: 800px;
         margin: 3rem auto;
         padding: 2rem;
-        background: #faf8f5;
-        border-radius: 1rem;
+        background: #eee7dc;
+        border-radius: 0;
+        border-left: 3px solid #858b73;
       }
 
       .location-section h2 {
@@ -100,7 +106,7 @@
         text-align: left;
         font-size: 0.95rem;
         line-height: 1.8;
-        opacity: 0.7;
+        color: #626454;
       }
 
       .location-details p {
@@ -108,7 +114,7 @@
       }
 
       .location-details strong {
-        color: #111827;
+        color: #424638;
       }
     </style>
   </head>

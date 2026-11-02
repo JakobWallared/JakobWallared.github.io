@@ -7,7 +7,7 @@
 
     <!-- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -55,8 +55,29 @@
             <p class="gallery-description"> De finaste ögonblicken är de vi delar tillsammans. Vi skulle älska att få se vår stora dag genom era ögon! Ladda gärna upp era bilder och hjälp oss att bevara minnena för alltid.</p>
           </div>
 
-          <div id="galleryGrid" class="gallery-grid">
-            <!-- Bilder läggs till här av gallery.js -->
+          <div class="gallery-carousel" aria-label="Bildspel">
+            <button
+              id="galleryPrevious"
+              class="gallery-control gallery-control-previous"
+              type="button"
+              aria-label="Föregående bild"
+              hidden
+            >
+              <span aria-hidden="true">&#8249;</span>
+            </button>
+            <div id="galleryGrid" class="gallery-grid" aria-live="polite">
+              <!-- Bilder läggs till här av gallery.js -->
+            </div>
+            <button
+              id="galleryNext"
+              class="gallery-control gallery-control-next"
+              type="button"
+              aria-label="Nästa bild"
+              hidden
+            >
+              <span aria-hidden="true">&#8250;</span>
+            </button>
+            <p id="galleryCounter" class="gallery-counter" aria-live="polite"></p>
           </div>
 
           <!-- UPLOAD SECTION -->

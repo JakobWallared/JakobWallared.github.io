@@ -6,13 +6,14 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  background: #f7f5f0;
-  color: #111827;
+  font-family: "DM Sans", sans-serif;
+  background: #f5f0e8;
+  color: #35382e;
+  line-height: 1.6;
 }
 
 .serif {
-  font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", "Cormorant Garamond", serif;
 }
 
 /* ===== HEADER ===== */
@@ -21,9 +22,9 @@ header {
   width: 100%;
   top: 0;
   z-index: 50;
-  background: rgba(247, 245, 240, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(247, 244, 236, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(89, 91, 73, 0.16);
 }
 
 .header-container {
@@ -33,11 +34,14 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
+  min-height: 4.75rem;
 }
 
 .logo {
   font-family: "Playfair Display", serif;
-  font-size: 1.25rem;
+  font-size: 1.45rem;
+  color: #3e4437;
+  letter-spacing: 0.06em;
 }
 
 /* ===== NAVIGATION ===== */
@@ -45,12 +49,14 @@ nav.desktop-nav {
   display: none;
   gap: 2rem;
   font-size: 0.875rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
 }
 
 nav.desktop-nav a {
   text-decoration: none;
-  color: #111827;
+  color: #484a3d;
   transition: opacity 0.3s ease;
 }
 
@@ -68,7 +74,8 @@ nav.desktop-nav a:hover {
   display: block;
   background: none;
   border: none;
-  font-size: 1.25rem;
+  font-size: 1.45rem;
+  color: #434738;
   cursor: pointer;
   padding: 0;
 }
@@ -84,7 +91,7 @@ nav.desktop-nav a:hover {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  background: #f7f5f0;
+  background: #f7f4ec;
 }
 
 .mobile-nav.open {
@@ -94,9 +101,9 @@ nav.desktop-nav a:hover {
 .mobile-nav a {
   display: block;
   padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(89, 91, 73, 0.12);
   text-decoration: none;
-  color: #111827;
+  color: #484a3d;
   font-size: 0.875rem;
 }
 
@@ -108,11 +115,13 @@ nav.desktop-nav a:hover {
 
 /* ===== CTA BUTTON ===== */
 .btn-rsvp {
-  background: black;
-  color: white;
+  background: #858b73;
+  color: #fffdf8;
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
-  border-radius: 9999px;
+  border-radius: 0;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
   text-decoration: none;
   transition: opacity 0.3s ease;
 }
@@ -136,7 +145,9 @@ footer {
   text-align: center;
   padding: 2.5rem 0;
   font-size: 0.875rem;
-  opacity: 0.6;
+  color: #777a68;
+  background: #eee7dc;
+  letter-spacing: 0.08em;
 }
 
 /* ===== CONTAINER ===== */
